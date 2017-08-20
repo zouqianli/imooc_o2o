@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="f60017c3-179f-4996-b3c7-441f42993583" name="imooc_o2o" url="http://localhost:63342/imooc_o2o/imooc_o2o/public/">
+        <fileTransfer port="0" mountedRoot="$PROJECT_DIR$/imooc_o2o" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
