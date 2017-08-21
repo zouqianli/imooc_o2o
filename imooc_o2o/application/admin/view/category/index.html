@@ -34,6 +34,9 @@
 		</table>
 	</div>
 </div>
+<!--分页渲染 不用分页要删除下面的div 数组不能使用render()方法-->
+<!--样式需要自定义优化-->
+<div class="cl pd-5 bg-1 bk-gray mt-20 tp5-o2o">{$categorys->render()}</div>
 <!--包含头部文件-->
 {include file="public/footer" /}
 
