@@ -18,19 +18,37 @@ class Category extends Controller
         $this->category = model("Category");
     }
 
+    /**
+     * 分类列表
+     * @return mixed返回一级分类列表
+     */
     public function index()
     {
-        return $this->fetch();
+        // 获取parentID,默认值0,整型
+        $parentID = input('get.parent_id',0,'intval');
+        // 根据parentID获取未删除(正常,待审)分类,传递给模板
+        $categorys = $this->category->getFirstCategory($parentID);
+        return $this->fetch('',[
+            'categorys'=>$categorys,
+        ]);
     }
+
+    /**
+     * 分类添加模板
+     * @return mixed
+     */
     public function add()
     {
-        // 模型获取所有一级分类,传给模板
-//        $categorys = model("Category")->getNormalFirstCategory();
+        // 模型获取正常一级分类,传给模板
         $categorys = $this->category->getNormalFirstCategory();
         return $this->fetch('',[
             'categorys' => $categorys,
         ]);
     }
+
+    /**
+     * 获取分类数据,验证(场景)分类数据,保存到数据库
+     */
     public function save()
     {
         $data = input('post.');
@@ -41,7 +59,6 @@ class Category extends Controller
             $this->error($validate->getError());
         }
 //      4. 提交$data到model层,添加分类
-//        $res = model('Category')->add($data);
         $res = $this->category->add($data);
         if($res)
         {

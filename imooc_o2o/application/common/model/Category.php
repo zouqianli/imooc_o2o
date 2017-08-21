@@ -22,8 +22,8 @@ class Category extends Model
     }
 
     /**
-     * 查询一级分类
-     * @return 返回一级分类
+     * 查询一级分类--正常状态
+     * @return 返回一级分类--正常状态
      */
     public function getNormalFirstCategory()
     {
@@ -32,10 +32,31 @@ class Category extends Model
             'parent_id'=>0,
         ];
         $order = [
-            'listorder'=>'desc',
+            'id'=>'desc',
         ];
         return $this->where($data)
             ->order($order)
             ->select();
+    }
+    /**
+     * 查询分类--正常状态和待审状态--默认查询一级分类
+     * @parentID 根据parent_id查找子分类
+     * @return 返回分类--正常状态和待审状态
+     */
+    public function getFirstCategory($parentID=0)
+    {
+        $data = [
+            'status'=>['neq',-1],
+            'parent_id'=>$parentID,
+        ];
+        $order = [
+            'id'=>'desc',
+        ];
+        $result = $this->where($data)
+            ->order($order)
+            ->select();
+//        echo $this->getLastSql();//获取sql语句
+        return $result;
+
     }
 }
