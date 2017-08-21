@@ -50,6 +50,7 @@ class Category extends Model
             'parent_id'=>$parentID,
         ];
         $order = [
+            'listorder'=>'desc', // 分类排序
             'id'=>'desc',
         ];
         $result = $this->where($data)

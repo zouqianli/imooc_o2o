@@ -130,5 +130,20 @@ class Category extends Controller
             $this->error('更新分类失败');
         }
     }
+
+    public function listorder($id, $listorder)
+    {
+        // 调用上面的保存(更新)方法 更新数据库
+        $res = $this->category->save(['listorder'=>$listorder], ['id'=>$id]);
+        if($res)
+        {
+            // result方法返回data数据--准备跳转的地址,code状态码,msg消息
+            $this->result($_SERVER['HTTP_REFERER'],1,'更新排序成功');
+        }
+        else
+        {
+            $this->result($_SERVER['HTTPREFERER'],0,'更新排序失败');
+        }
+    }
 }
 
