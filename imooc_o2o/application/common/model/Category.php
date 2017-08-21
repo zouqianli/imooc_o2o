@@ -12,12 +12,30 @@ class Category extends Model
 
     /**
      * @param $data 添加分类数据
-     * @return false|int 保存成功\失败
+     * @return 成功|失败
      */
     public function add($data)
     {
         $data['status'] = 1; // 默认分类状态:正常
         //$data['create_time'] = time(); // 默认分类添加时间:当前时间
         return $this->save($data); // 保存\修改
+    }
+
+    /**
+     * 查询一级分类
+     * @return 返回一级分类
+     */
+    public function getNormalFirstCategory()
+    {
+        $data = [
+            'status'=>1,
+            'parent_id'=>0,
+        ];
+        $order = [
+            'listorder'=>'desc',
+        ];
+        return $this->where($data)
+            ->order($order)
+            ->select();
     }
 }
