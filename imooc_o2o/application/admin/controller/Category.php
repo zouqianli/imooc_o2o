@@ -35,8 +35,8 @@ class Category extends Controller
         {
             $this->error($validate->getError());
         }
-//      4. 提交$data到model层
-
+//      4. 提交$data到model层,添加分类
+        model('Category')->add($data);
 
 
 
