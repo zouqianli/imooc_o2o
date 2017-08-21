@@ -51,6 +51,11 @@ class Category extends Controller
      */
     public function save()
     {
+        // 严格判断:不是post请求,给出错误提示
+        if(!request()->isPost())
+        {
+            $this->error('请求失败');
+        }
         $data = input('post.');
 //        3. 场景设置 中的add--指定字段数据会被验证,忽略其他数据
         $validate = validate('Category');
@@ -58,6 +63,12 @@ class Category extends Controller
         {
             $this->error($validate->getError());
         }
+        // 有id,进行更新操作
+        if(!empty($data['id']))
+        {
+            return $this->update($data);
+        }
+
 //      4. 提交$data到model层,添加分类
         $res = $this->category->add($data);
         if($res)
@@ -72,4 +83,52 @@ class Category extends Controller
 
 
     }
+
+    /**
+     * 根据id,parentID更新分类信息
+     * @param int $id 分类id
+     * @param int $parentID 分类父级id
+     * @return mixed 传递参数给模板
+     */
+    public function edit($id=0, $parentID=0)
+    {
+        //1. 判断编辑时传递的参数id(对应分类表中为主键),默认0
+        if($id<1)
+        {
+            $this->error('参数不合法');
+        }
+        //2. 根据id获取要编辑的分类信息,传递给模板
+        $category = $this->category->get($id);
+
+        //2.1 调试编辑 分类信息为app\common\model\Category Object(...)对象
+        //print_r($category);exit;
+
+        //3. 根据parentID获取未删除(正常,待审)分类,传递给模板
+        $categorys = $this->category->getFirstCategory($parentID);
+
+        //4. 传递数据给模板
+        return $this->fetch('',[
+            'category'  =>  $category,
+            'categorys' =>  $categorys,
+        ]);
+    }
+
+    /**
+     * 更新分类信息
+     * @param $data更新数据
+     */
+    public function update($data)
+    {
+        // 使用model层的save()方法,根据隐藏域id更新数据
+        $res = $this->category->save($data,intval(['id'=>$data['id']]));
+        if($res)
+        {
+            $this->success('更新分类成功');
+        }
+        else
+        {
+            $this->error('更新分类失败');
+        }
+    }
 }
+

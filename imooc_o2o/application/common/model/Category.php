@@ -54,7 +54,7 @@ class Category extends Model
         ];
         $result = $this->where($data)
             ->order($order)
-            ->select();
+            ->paginate();// 分页 默认15条--config.php分页配置paginate
 //        echo $this->getLastSql();//获取sql语句
         return $result;
 

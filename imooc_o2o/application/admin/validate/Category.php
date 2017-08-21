@@ -14,7 +14,8 @@ class Category extends Validate
     ];
     //2.场景设置 对不同场景验证不同字段
     protected $scene = [
-        'add' => ['name','parent_id'],//添加 验证name,parent_id字段
-        'listorder' => ['id','listorder'],//排序 验证id,listorder字段
+        'add' => ['name','parent_id',],    //添加 验证name,parent_id
+        'add' => ['name','parent_id','id'],//编辑 验证name,parent_id,id
+        'listorder' => ['id','listorder'], //排序 验证id,listorder
     ];
 }
