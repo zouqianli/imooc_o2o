@@ -17,5 +17,6 @@ class Category extends Validate
         'add' => ['name','parent_id',],    //添加 验证name,parent_id
         'add' => ['name','parent_id','id'],//编辑 验证name,parent_id,id
         'listorder' => ['id','listorder'], //排序 验证id,listorder
+        'status'    =>  ['id','status']
     ];
 }

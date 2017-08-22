@@ -79,9 +79,6 @@ class Category extends Controller
         {
             $this->error('新增分类失败');
         }
-
-
-
     }
 
     /**
@@ -131,9 +128,14 @@ class Category extends Controller
         }
     }
 
+    /**
+     * 排序功能
+     * @param $id分类id
+     * @param $listorder分类父级id
+     */
     public function listorder($id, $listorder)
     {
-        // 调用上面的保存(更新)方法 更新数据库
+        // 调用上面的保存(更新)方法 更新数据库--排序值
         $res = $this->category->save(['listorder'=>$listorder], ['id'=>$id]);
         if($res)
         {
@@ -144,6 +146,32 @@ class Category extends Controller
         {
             $this->result($_SERVER['HTTPREFERER'],0,'更新排序失败');
         }
+    }
+
+    public function status()
+    {
+        //测试获取数据
+        //print_r(input('get.'));
+        // get获取数据
+        $data = input('get.');
+        // 场景验证 id status
+        $validate = validate('Category');
+        if(!$validate->scene('status')->check($data))
+        {
+            $this->error($validate->getError());
+        }
+        // 调用上面的保存(更新)方法 更新数据库--状态
+        $res = $this->category->save(['status'=>$data['status']], ['id'=>$data['id']]);
+        if($res)
+        {
+            $this->success('更新状态成功');
+        }
+        else
+        {
+            $this->error('更新状态失败');
+        }
+
+
     }
 }
 

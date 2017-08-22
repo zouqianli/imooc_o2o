@@ -10,16 +10,21 @@
 // +----------------------------------------------------------------------
 
 return [
+//    TODO环境变量配置 场景配置 结合使用配置不同场景的数据库配置
     // 数据库类型
     'type'            => 'mysql',
     // 服务器地址
     'hostname'        => 'localhost',
+//    'hostname'        => 'bdm313469470.my3w.com',
     // 数据库名
     'database'        => 'myo2o',
+//    'database'        => 'bdm313469470_db',
     // 用户名
     'username'        => 'root',
+//    'username'        => 'bdm313469470',
     // 密码
     'password'        => 'root',
+//    'password'        => 'zql200599',
     // 端口
     'hostport'        => '3306',
     // 连接dsn

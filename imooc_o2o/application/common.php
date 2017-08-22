@@ -31,3 +31,36 @@ function status($status)
     }
     return $str;
 }
+
+/**
+ * 获取指定地址的内容
+ * @param $url地址
+ * @param $type 默认0 get方式,1 post方式
+ * @param array $data参数
+ * @return mixed内容
+ */
+function doCurl($url, $type=0, $data=[])
+{
+    // 1 初始化
+    $ch = curl_init();
+    // 2 设置选项
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HEADER, 0);
+
+    // 3 类型
+    if($type == 1)
+    {
+        // post方式
+        curl_setopt($ch,CURLOPT_POST, 1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
+    }
+
+    // 4 执行 并 获取内容 $result
+    $result = curl_exec($ch);
+    // 5 释放curl句柄
+    curl_close($ch);
+    // 6 返回内容
+    return $result;
+
+}
