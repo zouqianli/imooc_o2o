@@ -16,7 +16,10 @@ class Index extends Controller
     public function test()
     {
 // http://api.map.baidu.com/geocoder/v2/?ak=sK0wQFqCiIqy59wpcadHDCzkZCyCcLx9&address='重庆市沙坪坝大学城'
-        \Map::getLongitudeAndLatitudeByAddress('重庆市沙坪坝大学城');
-        return 'zz';
+        return \Map::getLongitudeAndLatitudeByAddress('重庆市沙坪坝大学城');
+    }
+    public function map()
+    {
+        return \Map::staticImage('重庆市沙坪坝大学城');
     }
 }
