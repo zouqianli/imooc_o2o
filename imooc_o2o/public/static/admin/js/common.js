@@ -66,3 +66,39 @@ $(".listorder input").blur(function() {
         },'json');
     }
 });
+
+/**城市 二级联动选择**/
+$('.cityId').change(function () {
+    // 1 城市id
+    var city_id = $(this).val();
+    // alert(city_id);
+    // 2 url
+    var url = SCOPE.city_url;
+    // alert(url);
+    // 3 准备数据
+    var postData = {
+        'id': city_id
+    };
+    // 4 抛送ajax
+    $.post(url, postData, function (result ) {
+        // 5 处理回调结果
+        if(result.status == 1)
+        {// 将数据填充到html模板
+            var data = result.data;
+            var select_option = '';
+            $(data).each(function () {
+                select_option += "<option value='"+this.id+"'>"+this.name+"</option>";
+            });
+            $('.se_city_id').html(select_option);
+        }
+        else if(result.status == 0)
+        {
+            alert(result.message);
+            $('.se_city_id').html('<option value="0">--请选择--</option>');
+            return;
+        }
+
+    }, 'json');
+
+
+});
