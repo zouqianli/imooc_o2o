@@ -60,4 +60,23 @@ class Category extends Model
         return $result;
 
     }
+
+    /**
+     * 获取分类--默认一级
+     * @param int $parentID
+     * @return mixed
+     */
+    public function getNormalCategorysByParentID($parentID=0)
+    {
+        $data = [
+            'status'=>1,
+            'parent_id'=> $parentID,
+        ];
+        $order = [
+            'id'=>'desc',
+        ];
+        return $this->where($data)
+            ->order($order)
+            ->select();
+    }
 }

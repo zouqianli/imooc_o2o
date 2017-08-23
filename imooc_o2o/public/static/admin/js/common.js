@@ -67,7 +67,7 @@ $(".listorder input").blur(function() {
     }
 });
 
-/**城市 二级联动选择**/
+/**商户入驻:城市 二级联动选择**/
 $('.cityId').change(function () {
     // 1 城市id
     var city_id = $(this).val();
@@ -99,6 +99,40 @@ $('.cityId').change(function () {
         }
 
     }, 'json');
+});
 
+/**商户入驻:分类 二级联动选择**/
+$('.categoryId').change(function () {
+    // 1 城市id
+    var category_id = $(this).val();
+    // alert(category_id);
+    // 2 url
+    var url = SCOPE.category_url;
+    // alert(url);
+    // 3 准备数据
+    var postData = {
+        'id': category_id,
+    };
+    // 4 抛送ajax
+    $.post(url, postData, function (result ) {
+        // 5 处理回调结果
+        if(result.status == 1)
+        {// 将数据填充到html模板
+            var data = result.data;
+            var sub_categorys_html = '';
+            $(data).each(function (i) {
+                sub_categorys_html += '<input name="se_category_id[]" type="checkbox" id="checkbox-moban'+i+'" value="'+this.id+'"/>';
+                sub_categorys_html += '<label for="checkbox-moban'+i+'">'+this.name+'&nbsp;</label>';
+            });
+            $('.se_category_id').html(sub_categorys_html);
 
+        }
+        else if(result.status == 0)
+        {
+            alert(result.message);
+            $('.se_category_id').html('');
+            return;
+        }
+
+    }, 'json');
 });
