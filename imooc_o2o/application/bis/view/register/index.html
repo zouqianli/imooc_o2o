@@ -37,8 +37,8 @@
               <label class="form-label col-xs-4 col-sm-2">缩略图：</label>
               <div class="formControls col-xs-8 col-sm-9">
                 <input id="file_upload"  type="file" multiple="true" >
-                <img style="display: none" id="upload_org_code_img" src="" width="150" height="150">
-                <input id="file_upload_image" name="logo" type="hidden" multiple="true" value="">
+                <img style="display: none" id="upload_org_code_img" src="{:url('')}" width="150" height="150">  <!--显示图片-->
+                <input id="file_upload_image" name="logo" type="hidden" multiple="true" value=""> <!--入驻申请提交时再次上传,可以保存到数据库|upload-->
               </div>
         </div>
         <div class="row cl">
@@ -178,6 +178,8 @@
 	    // 城市选择可以复用,放到api
 	    'city_url':'{:url(\'api/city/getCitysByParentID\')}',
         'category_url':'{:url(\'api/category/getCategoryByParentID\')}',
+		'uploadify_swf':'__STATIC__/admin/uploadify/uploadify.swf',
+		'image_upload':'{:url(\'api/Image/upload\')}',
 	}
 </script>
 <!--分配编辑器-->
