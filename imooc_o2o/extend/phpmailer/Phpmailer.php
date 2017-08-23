@@ -25,6 +25,8 @@
  * @author Andy Prevost (codeworxtech) <codeworxtech@users.sourceforge.net>
  * @author Brent R. Matzelle (original founder)
  */
+namespace phpmailer;
+use \phpmailer\SMTP;
 class PHPMailer
 {
     /**
@@ -4025,7 +4027,7 @@ class PHPMailer
  * PHPMailer exception handler
  * @package PHPMailer
  */
-class phpmailerException extends Exception
+class phpmailerException extends \Exception
 {
     /**
      * Prettify error message output
