@@ -10,8 +10,8 @@ class Index extends Controller
     }
     public function welcome()
     {
-        \phpmailer\Email::send('1004248149@qq.com','tp5_email',"send ok");
-        return '发送邮件成功';
+//        \phpmailer\Email::send('1004248149@qq.com','tp5_email',"send ok");
+//        return '发送邮件成功';
 //        return $this->fetch(); // 有对应的welcome.html模板文件
         return '欢迎来到后台';
     }
