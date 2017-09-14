@@ -12,6 +12,8 @@
 // [ 应用入口文件 ]
 
 // 定义应用目录
-define('APP_PATH', __DIR__ . '/../application/');
+define('APP_PATH', __DIR__ . '/../app/');
+// 定义应用配置目录(可选:某些方法可能找不到app/common/status)
+define('CONF_PATH', __DIR__ . '/../conf/');
 // 加载框架引导文件
 require __DIR__ . '/../thinkphp/start.php';
